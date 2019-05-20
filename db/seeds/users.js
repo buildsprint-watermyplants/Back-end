@@ -6,19 +6,9 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex("users").insert([
         {
-          username: "Buzz",
+          username: "admin",
           password: "password",
-          phoneNumber: "5551234567"
-        },
-        {
-          username: "Woody",
-          password: "password",
-          phoneNumber: "5552345678"
-        },
-        {
-          username: "Jesse",
-          password: "password",
-          phoneNumber: "5553456789"
+          phoneNumber: "5555555555"
         }
       ]);
     });
