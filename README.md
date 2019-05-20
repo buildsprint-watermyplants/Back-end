@@ -53,40 +53,36 @@
 }
 ```
 
-#### Users
-
-#### Plants
-
-### Auth Routes
+# Auth Routes
 
 | Table | Method |           Endpoint |                      Description |
 | ----- | :----: | -----------------: | -------------------------------: |
 | users |  POST  | /api/auth/register |            Registers a new user. |
 | users |  POST  |    /api/auth/login | Logs in already registered user. |
 
-#### Register
+## Register
 
-##### Registers a new user.
+### Registers a new user.
 
-Method URL: /api/auth/register
+_Method URL:_ `/api/auth/register`
 
-HTTP Method: POST
+_HTTP Method:_ **[POST]**
 
-###### Headers
+#### Headers
 
-| Name         |  Type  | Required |              Description |
-| ------------ | :----: | -------: | -----------------------: |
-| Content-Type | String |      Yes | Must be application/JSON |
+| Name           |  Type  | Required |              Description |
+| -------------- | :----: | -------: | -----------------------: |
+| `Content-Type` | String |      Yes | Must be application/JSON |
 
-###### Body
+#### Body
 
-| Name        |  Type  | Required |     Description |
-| ----------- | :----: | -------: | --------------: |
-| username    | String |      Yes | Must be unique. |
-| password    | String |      Yes |                 |
-| phoneNumber | String |       No |                 |
+| Name          |  Type  | Required |     Description |
+| ------------- | :----: | -------: | --------------: |
+| `username`    | String |      Yes | Must be unique. |
+| `password`    | String |      Yes |                 |
+| `phoneNumber` | String |       No |                 |
 
-###### Example
+#### Example
 
 ```
 {
@@ -96,13 +92,19 @@ HTTP Method: POST
 }
 ```
 
-###### Response
+#### Response
 
-201
+##### 201 (Created)
 
-400
+> If you successfully register a user, the endpoint will return an HTTP response with a status code `201`.
 
-500
+##### 400 (Bad Request)
+
+> If you are missing a username or a password, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
 #### Login
 
@@ -136,11 +138,21 @@ HTTP Method: POST
 
 ###### Response
 
-200
+##### 200 (OK)
 
-400
+> If you successfully login, the endpoint will return an HTTP response with a status code `200`.
 
-500
+##### 400 (Bad Request)
+
+> If you are missing a username or a password, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 401 (Unauthorized)
+
+> If you provide invalid credentials, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
 ### User Routes
 
