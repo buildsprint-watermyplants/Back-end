@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     plants.time("dailyWaterTime");
     plants
       .integer("user_id")
+      .unsigned()
       .references("id")
       .inTable("users")
       .onDelete("CASCADE")
