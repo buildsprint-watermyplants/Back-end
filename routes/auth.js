@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
+const createToken = require("../helpers/auth/generateToken");
+
 const Users = require("../db/models/User");
 
 router.post("/register", (req, res) => {
@@ -26,7 +28,7 @@ router.post("/login", (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = tokenService.generateToken(user);
+        const token = createToken.generateToken(user);
         res.status(200).json({
           message: `Welcome ${user.username}!`,
           token
