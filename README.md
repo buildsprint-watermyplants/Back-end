@@ -2,11 +2,14 @@
 
 ## Table of Contents
 
--[Auth Routes](#auth-routes) - [Register User](#register) - [Login User](#login)
+- [Auth Routes](#auth-routes)
 
--[User Routes](#user-routes)
+  - [Register User](#register)
+  - [Login User](#login)
 
--[Plant Routes](#plant-routes)
+- [User Routes](#user-routes)
+
+- [Plant Routes](#plant-routes)
 
 ## API Documentation
 
