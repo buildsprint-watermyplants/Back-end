@@ -12,9 +12,11 @@ app.use(express.json());
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
+const plantRoutes = require("./routes/plants");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/plants", plantRoutes);
 
 const port = 3000;
 
