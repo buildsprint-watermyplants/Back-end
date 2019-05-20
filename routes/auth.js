@@ -12,7 +12,7 @@ router.post("/register", (req, res) => {
   const { username, password } = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
-  if (!username || password) {
+  if (!username || !password) {
     res
       .status(400)
       .json({ message: "Please provide a username and a password." });
@@ -29,7 +29,7 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
 
-  if (!username || password) {
+  if (!username || !password) {
     res
       .status(400)
       .json({ message: "Please provide a username and a password." });
