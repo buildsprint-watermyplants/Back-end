@@ -22,4 +22,26 @@ router.get("/:id", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+router.delete("/:id", restricted, (req, res) => {
+  Users.remove(req.params.id)
+    .then(deleted => {
+      res.status(200).json({ message: "Deleted account." });
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+router.put("/:id", restricted, (req, res) => {
+  let user = req.body;
+  let id = req.params.id;
+  Users.findByIdAndUpdate(user, id)
+    .then(updated => {
+      res.status(201).json({ message: "Updated account." });
+    })
+    .catch(error => {
+      res.status(500).json({ message: "Failed to update account." });
+    });
+});
+
 module.exports = router;
