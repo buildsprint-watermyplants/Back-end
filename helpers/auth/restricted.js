@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const secrets = require("../../config/secrets");
+const secrets = require("../../config/keys").jwtSecret;
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
