@@ -1,5 +1,13 @@
 # Water My Plants
 
+## Table of Contents
+
+-[Auth Routes](#auth-routes) - [Register User](#register) - [Login User](#login)
+
+-[User Routes](#user-routes)
+
+-[Plant Routes](#plant-routes)
+
 ## API Documentation
 
 | Table | Method |           Endpoint |                      Description |
