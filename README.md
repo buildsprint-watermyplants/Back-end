@@ -35,13 +35,9 @@ HTTP Method: POST
 
 ```
 {
-
 "username": "plantlover",
-
 "password": "plants,
-
 "phoneNumber": "5555555555"
-
 }
 ```
 
@@ -78,11 +74,8 @@ HTTP Method: POST
 
 ```
 {
-
 "username": "plantlover",
-
 "password": "plants
-
 }
 ```
 

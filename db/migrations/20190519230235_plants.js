@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     plants.increments();
 
     plants.string("plantName", 128).notNullable();
+    plants.time("dailyWaterTime");
   });
 };
 
