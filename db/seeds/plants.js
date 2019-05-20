@@ -6,12 +6,14 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex("plants").insert([
         {
+          id: 1,
           plantName: "Watermelon",
           dailyWaterTime: "08:00:00",
           user_id: 1
         },
-        { plantName: "Tomato", dailyWaterTime: "09:00:00", user_id: 1 },
+        { id: 2, plantName: "Tomato", dailyWaterTime: "09:00:00", user_id: 1 },
         {
+          id: 3,
           plantName: "Sunflower",
           dailyWaterTime: "10:00:00",
           user_id: 1
