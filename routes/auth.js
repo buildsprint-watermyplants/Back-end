@@ -13,16 +13,16 @@ router.post("/register", (req, res) => {
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
   if (!username || !password) {
-    res
+    return res
       .status(400)
       .json({ message: "Please provide a username and a password." });
   }
   Users.add(user)
     .then(saved => {
-      res.status(201).json(saved);
+      return res.status(201).json(saved);
     })
     .catch(error => {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     });
 });
 
@@ -30,7 +30,7 @@ router.post("/login", (req, res) => {
   let { username, password } = req.body;
 
   if (!username || !password) {
-    res
+    return res
       .status(400)
       .json({ message: "Please provide a username and a password." });
   }
@@ -44,12 +44,10 @@ router.post("/login", (req, res) => {
           token
         });
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        return res.status(401).json({ message: "Invalid Credentials" });
       }
     })
-    .catch(error => {
-      res.status(500).json(error.message);
-    });
+    .catch(error => res.status(500).json(error.message));
 });
 
 module.exports = router;

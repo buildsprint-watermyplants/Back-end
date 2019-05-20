@@ -270,6 +270,24 @@ _HTTP Method:_ **[PUT]**
 | `Content-Type`  | String |      Yes | Must be application/JSON |
 | `Authorization` | String |      Yes |           JSON Web Token |
 
+#### Body
+
+| Name          |  Type  | Required |     Description |
+| ------------- | :----: | -------: | --------------: |
+| `username`    | String |      Yes | Must be unique. |
+| `password`    | String |      Yes |                 |
+| `phoneNumber` | String |       No |                 |
+
+#### Example
+
+```
+{
+"username": "plantlover",
+"password": "plants,
+"phoneNumber": "5555555555"
+}
+```
+
 #### Response
 
 ##### 200 (OK)
@@ -304,6 +322,22 @@ _HTTP Method:_ **[POST]**
 | --------------- | :----: | -------: | -----------------------: |
 | `Content-Type`  | String |      Yes | Must be application/JSON |
 | `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name             |  Type  | Required | Description |
+| ---------------- | :----: | -------: | ----------: |
+| `plantName`      | String |      Yes |             |
+| `dailyWaterTime` | String |       No |             |
+
+#### Example
+
+```
+{
+"plantName": "Carrots",
+"dailyWaterTime": "08:00:00"
+}
+```
 
 #### Response
 
@@ -393,6 +427,80 @@ _HTTP Method:_ **[GET]**
 
 ### Updates plant by ID.
 
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[PUT]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name             |  Type  | Required |           Description |
+| ---------------- | :----: | -------: | --------------------: |
+| `plantName`      | String |      Yes |                       |
+| `dailyWaterTime` | String |       No | Formatted as HH:MM:SS |
+
+#### Example
+
+```
+{
+"plantName": "Tulips",
+"dailyWaterTime": "09:30:00"
+}
+```
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found and updated, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found and updated, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
 ## Delete Plant
 
 ### Deletes plant by ID.
+
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[DELETE]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found and deleted, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found and deleted, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
