@@ -106,28 +106,28 @@ _HTTP Method:_ **[POST]**
 
 > If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
-#### Login
+## Login
 
-##### Logs in already registered user.
+### Logs in already registered user.
 
 Method URL: /api/auth/login
 
 HTTP Method: POST
 
-###### Headers
+#### Headers
 
 | Name         |  Type  | Required |              Description |
 | ------------ | :----: | -------: | -----------------------: |
 | Content-Type | String |      Yes | Must be application/JSON |
 
-###### Body
+#### Body
 
 | Name     |  Type  | Required |                                             Description |
 | -------- | :----: | -------: | ------------------------------------------------------: |
 | username | String |      Yes |                        Must match username in database. |
 | password | String |      Yes | Must match password to corresponding email in database. |
 
-###### Example
+#### Example
 
 ```
 {
@@ -136,7 +136,7 @@ HTTP Method: POST
 }
 ```
 
-###### Response
+#### Response
 
 ##### 200 (OK)
 
