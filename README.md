@@ -14,6 +14,7 @@
 ##### Registers a new user.
 
 Method URL: /api/auth/register
+
 HTTP Method: POST
 
 ###### Headers
@@ -32,11 +33,17 @@ HTTP Method: POST
 
 ###### Example
 
+```
 {
+
 "username": "plantlover",
+
 "password": "plants,
+
 "phoneNumber": "5555555555"
+
 }
+```
 
 ###### Response
 
@@ -51,6 +58,7 @@ HTTP Method: POST
 ##### Logs in already registered user.
 
 Method URL: /api/auth/login
+
 HTTP Method: POST
 
 ###### Headers
@@ -68,10 +76,15 @@ HTTP Method: POST
 
 ###### Example
 
+```
 {
+
 "username": "plantlover",
+
 "password": "plants
+
 }
+```
 
 ###### Response
 
