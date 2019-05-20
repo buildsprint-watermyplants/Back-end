@@ -4,7 +4,7 @@ const router = express.Router();
 
 const restricted = require("../helpers/auth/restricted");
 
-const Plants = require("../db/models/Plant");
+const Plants = require("../db/models/Plants");
 
 router.post("/", (req, res) => {});
 
