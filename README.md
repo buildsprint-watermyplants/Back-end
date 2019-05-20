@@ -2,23 +2,36 @@
 
 ## Table of Contents
 
+- [Dummy Data](#dummy-data)
 - [Auth Routes](#auth-routes)
-
   - [Register User](#register)
   - [Login User](#login)
-
 - [User Routes](#user-routes)
-
+  - [Get Users](#get-users)
+  - [Get User](#get-user)
+  - [Update Users](#update-user)
+  - [Delete User](#delete-user)
 - [Plant Routes](#plant-routes)
+  - [Create Plant](#create-plant)
+  - [Get Plants](#get-plants)
+  - [Get Plant](#get-plant)
+  - [Update Plants](#update-plant)
+  - [Delete Plants](#delete-plant)
 
 ## API Documentation
+
+### Dummy Data
+
+#### Users
+
+#### Plants
+
+### Auth Routes
 
 | Table | Method |           Endpoint |                      Description |
 | ----- | :----: | -----------------: | -------------------------------: |
 | users |  POST  | /api/auth/register |            Registers a new user. |
 | users |  POST  |    /api/auth/login | Logs in already registered user. |
-
-### Auth Routes
 
 #### Register
 
@@ -108,10 +121,32 @@ HTTP Method: POST
 
 ##### Gets user by ID.
 
+#### Update User
+
+##### Updates user by ID.
+
 #### Delete User
 
 ##### Deletes user by ID.
 
-#### Update User
+### Plant Routes
 
-##### Updates user by ID.
+#### Create Plant
+
+##### Creates a plant with plant name and water time.
+
+#### Get Plants
+
+##### Gets a list of plants.
+
+#### Get Plant
+
+##### Gets plant by ID.
+
+#### Update Plant
+
+##### Updates plant by ID.
+
+#### Delete Plant
+
+##### Deletes plant by ID.
