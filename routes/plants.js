@@ -8,15 +8,25 @@ const Plants = require("../db/models/Plants");
 
 router.post("/", restricted, (req, res) => {
   let plant = req.body;
+  const { plantName } = req.body;
+  if (!plantName) {
+    return res.status(400).json({ message: "Please provide a plant name." });
+  }
   Plants.add(plant)
-    .then(plant => res.status(201).json(plant))
+    .then(plant => {
+      return res.status(201).json(plant);
+    })
     .catch(err => res.status(500).json(err));
 });
 
 router.get("/", restricted, (req, res) => {
   Plants.find()
     .then(plants => {
-      res.status(200).json(plants);
+      if (plants) {
+        return res.status(200).json(plants);
+      } else {
+        return res.status(404).json({ error: "Plants not found." });
+      }
     })
     .catch(err => res.status(500).json(err));
 });

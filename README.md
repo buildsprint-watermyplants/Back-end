@@ -294,13 +294,100 @@ _HTTP Method:_ **[PUT]**
 
 ### Creates a plant with plant name and water time.
 
+_Method URL:_ `/api/plants/`
+
+_HTTP Method:_ **[POST]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 201 (Created)
+
+> If plant is created, the endpoint will return an HTTP response with a status code `201`.
+
+##### 400 (Bad Request)
+
+> If you are missing a plant name, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
 ## Get Plants
 
 ### Gets a list of plants.
 
+_Method URL:_ `/api/plants/`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plants are not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
 ## Get Plant
 
 ### Gets plant by ID.
+
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
 ## Update Plant
 
