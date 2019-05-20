@@ -32,7 +32,7 @@ router.get("/:id", restricted, (req, res) => {
 router.put("/:id", restricted, (req, res) => {
   let plant = req.body;
   let id = req.params.id;
-  Users.findByIdAndUpdate(plant, id)
+  Plants.findByIdAndUpdate(plant, id)
     .then(updated => {
       res.status(200).json({ message: "Updated plant." });
     })
