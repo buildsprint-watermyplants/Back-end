@@ -28,7 +28,7 @@
 {
     "id": 1,
     "username": "admin",
-    "password": "passgit",
+    "password": "password",
     "phoneNumber": "5555555555",
     "plants": [
         {
