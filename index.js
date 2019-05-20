@@ -13,8 +13,8 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 
-app.use("/auth/", authRoutes);
-app.use("/api/", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 const port = 3000;
 

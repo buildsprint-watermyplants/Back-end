@@ -4,9 +4,9 @@ const router = express.Router();
 
 const restricted = require("../helpers/auth/restricted");
 
-const Users = require("../users/users-model.js");
+const Users = require("../db/models/User");
 
-router.get("/", restriced, (req, res) => {
+router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
@@ -21,3 +21,5 @@ router.get("/:id", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
+
+module.exports = router;
