@@ -9,15 +9,24 @@ const Users = require("../db/models/User");
 router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
-      res.json(users);
+      if (users) {
+        res.status(200).json(users);
+      } else {
+        res.status(404).json({ error: "Could not find users." });
+      }
     })
-    .catch(err => res.send(err));
+    .catch(err => res.status(500).send(err));
 });
 
 router.get("/:id", restricted, (req, res) => {
   Users.findById(req.params.id)
+
     .then(user => {
-      res.json(user);
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ error: "Could not find user." });
+      }
     })
     .catch(err => res.send(err));
 });
@@ -25,7 +34,11 @@ router.get("/:id", restricted, (req, res) => {
 router.delete("/:id", restricted, (req, res) => {
   Users.remove(req.params.id)
     .then(deleted => {
-      res.status(200).json({ message: "Deleted account." });
+      if (deleted) {
+        res.status(200).json({ message: "Deleted user." });
+      } else {
+        res.status(404).json({ message: "Could not find and delete user." });
+      }
     })
     .catch(error => {
       res.status(500).json(error);
@@ -37,10 +50,14 @@ router.put("/:id", restricted, (req, res) => {
   let id = req.params.id;
   Users.findByIdAndUpdate(user, id)
     .then(updated => {
-      res.status(201).json({ message: "Updated account." });
+      if (updated) {
+        res.status(200).json({ message: "Updated user." });
+      } else {
+        res.status(404).json({ message: "Could not find and update user." });
+      }
     })
     .catch(error => {
-      res.status(500).json({ message: "Failed to update account." });
+      res.status(500).json(error);
     });
 });
 

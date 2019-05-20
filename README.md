@@ -154,42 +154,158 @@ _HTTP Method:_ **[POST]**
 
 > If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
-### User Routes
+# User Routes
 
-#### Get Users
+## Get Users
 
-##### Gets a list of users.
+### Gets a list of users.
 
-#### Get User
+_Method URL:_ `/api/users/`
 
-##### Gets user by ID.
+_HTTP Method:_ **[GET]**
 
-#### Update User
+#### Headers
 
-##### Updates user by ID.
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
 
-#### Delete User
+#### Response
 
-##### Deletes user by ID.
+##### 200 (OK)
 
-### Plant Routes
+> If users are found, the endpoint will return an HTTP response with a status code `200`.
 
-#### Create Plant
+##### 404 (Not Found)
 
-##### Creates a plant with plant name and water time.
+> If users are not found, the endpoint will return an HTTP response with a status code `404`.
 
-#### Get Plants
+##### 401 (Unauthorized)
 
-##### Gets a list of plants.
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
 
-#### Get Plant
+##### 500 (Internal Service Error)
 
-##### Gets plant by ID.
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
-#### Update Plant
+## Get User
 
-##### Updates plant by ID.
+### Gets user by ID with associated plants.
 
-#### Delete Plant
+_Method URL:_ `/api/users/:id`
 
-##### Deletes plant by ID.
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Delete User
+
+### Deletes user by ID.
+
+_Method URL:_ `/api/users/:id`
+
+_HTTP Method:_ **[DELETE]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found and deleted, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Update User
+
+### Updates user by ID.
+
+_Method URL:_ `/api/users/:id`
+
+_HTTP Method:_ **[PUT]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found and updated, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+# Plant Routes
+
+## Create Plant
+
+### Creates a plant with plant name and water time.
+
+## Get Plants
+
+### Gets a list of plants.
+
+## Get Plant
+
+### Gets plant by ID.
+
+## Update Plant
+
+### Updates plant by ID.
+
+## Delete Plant
+
+### Deletes plant by ID.
