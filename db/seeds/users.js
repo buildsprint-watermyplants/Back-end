@@ -8,7 +8,7 @@ exports.seed = function(knex, Promise) {
         {
           id: 1,
           username: "admin",
-          password: "password",
+          password: "pass",
           phoneNumber: "5555555555"
         }
       ]);
