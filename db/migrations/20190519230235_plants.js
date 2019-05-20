@@ -3,7 +3,6 @@ exports.up = function(knex, Promise) {
     plants.increments();
 
     plants.string("plantName", 128).notNullable();
-    plants.string("speciesName", 128).notNullable();
   });
 };
 
