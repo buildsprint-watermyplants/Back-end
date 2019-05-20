@@ -110,22 +110,22 @@ _HTTP Method:_ **[POST]**
 
 ### Logs in already registered user.
 
-Method URL: /api/auth/login
+_Method URL:_ `/api/auth/login`
 
-HTTP Method: POST
+_HTTP Method:_ **[POST]**
 
 #### Headers
 
-| Name         |  Type  | Required |              Description |
-| ------------ | :----: | -------: | -----------------------: |
-| Content-Type | String |      Yes | Must be application/JSON |
+| Name           |  Type  | Required |              Description |
+| -------------- | :----: | -------: | -----------------------: |
+| `Content-Type` | String |      Yes | Must be application/JSON |
 
 #### Body
 
-| Name     |  Type  | Required |                                             Description |
-| -------- | :----: | -------: | ------------------------------------------------------: |
-| username | String |      Yes |                        Must match username in database. |
-| password | String |      Yes | Must match password to corresponding email in database. |
+| Name       |  Type  | Required |                                             Description |
+| ---------- | :----: | -------: | ------------------------------------------------------: |
+| `username` | String |      Yes |                        Must match username in database. |
+| `password` | String |      Yes | Must match password to corresponding email in database. |
 
 #### Example
 
