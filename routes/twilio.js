@@ -35,7 +35,7 @@ router.post("/", function(req, res, next) {
   const phoneNumber = req.body.phoneNumber;
   const notification = req.body.notification;
   const timeZone = req.body.timeZone;
-  const time = moment(req.body.time, "MM-DD-YYYY hh:mma");
+  const time = moment(req.body.time, "hh:mma");
 
   const reminder = new Reminder({
     plantName: plantName,

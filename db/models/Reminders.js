@@ -33,9 +33,10 @@ ReminderSchema.statics.sendNotifications = function(callback) {
     reminders = reminders.filter(function(reminder) {
       return reminder.requiresNotification(searchDate);
     });
-    if (reminders.length > 0) {
-      sendNotifications(reminders);
-    }
+    console.log(reminders.length);
+    // if (reminders.length > 0) {
+    sendNotifications(reminders);
+    // }
   });
 
   /**
@@ -50,9 +51,7 @@ ReminderSchema.statics.sendNotifications = function(callback) {
         to: `+ ${reminder.phoneNumber}`,
         from: keys.twilioNumber,
         /* eslint-disable max-len */
-        body: `Hi ${
-          reminder.plantName
-        }. Just a reminder that you have an appointment coming up.`
+        body: `It's time to water your ${reminder.plantName}!`
         /* eslint-enable max-len */
       };
 
