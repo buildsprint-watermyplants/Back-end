@@ -1,37 +1,88 @@
 # Water My Plants
 
+## Table of Contents
+
+- [Dummy Data](#dummy-data)
+- [Auth Routes](#auth-routes)
+  - [Register User](#register)
+  - [Login User](#login)
+- [User Routes](#user-routes)
+  - [Get Users](#get-users)
+  - [Get User](#get-user)
+  - [Update Users](#update-user)
+  - [Delete User](#delete-user)
+- [Plant Routes](#plant-routes)
+  - [Create Plant](#create-plant)
+  - [Get Plants](#get-plants)
+  - [Get Plant](#get-plant)
+  - [Update Plants](#update-plant)
+  - [Delete Plants](#delete-plant)
+
 ## API Documentation
+
+### Dummy Data
+
+#### Test user with plants.
+
+```
+{
+    "id": 1,
+    "username": "admin",
+    "password": "password",
+    "phoneNumber": "5555555555",
+    "plants": [
+        {
+            "id": 1,
+            "plantName": "Watermelon",
+            "dailyWaterTime": "08:00:00",
+            "user_id": 1
+        },
+        {
+            "id": 2,
+            "plantName": "Tomato",
+            "dailyWaterTime": "09:00:00",
+            "user_id": 1
+        },
+        {
+            "id": 3,
+            "plantName": "Sunflower",
+            "dailyWaterTime": "10:00:00",
+            "user_id": 1
+        }
+    ]
+}
+```
+
+# Auth Routes
 
 | Table | Method |           Endpoint |                      Description |
 | ----- | :----: | -----------------: | -------------------------------: |
 | users |  POST  | /api/auth/register |            Registers a new user. |
 | users |  POST  |    /api/auth/login | Logs in already registered user. |
 
-### Auth Routes
+## Register
 
-#### Register
+### Registers a new user.
 
-##### Registers a new user.
+_Method URL:_ `/api/auth/register`
 
-Method URL: /api/auth/register
+_HTTP Method:_ **[POST]**
 
-HTTP Method: POST
+#### Headers
 
-###### Headers
+| Name           |  Type  | Required |              Description |
+| -------------- | :----: | -------: | -----------------------: |
+| `Content-Type` | String |      Yes | Must be application/JSON |
 
-| Name         |  Type  | Required |              Description |
-| ------------ | :----: | -------: | -----------------------: |
-| Content-Type | String |      Yes | Must be application/JSON |
+#### Body
 
-###### Body
+| Name          |  Type  | Required |     Description |
+| ------------- | :----: | -------: | --------------: |
+| `username`    | String |      Yes | Must be unique. |
+| `password`    | String |      Yes |                 |
+| `phoneNumber` | String |       No |                 |
 
-| Name        |  Type  | Required |     Description |
-| ----------- | :----: | -------: | --------------: |
-| username    | String |      Yes | Must be unique. |
-| password    | String |      Yes |                 |
-| phoneNumber | String |       No |                 |
-
-###### Example
+#### Example
 
 ```
 {
@@ -41,36 +92,42 @@ HTTP Method: POST
 }
 ```
 
-###### Response
+#### Response
 
-201
+##### 201 (Created)
 
-400
+> If you successfully register a user, the endpoint will return an HTTP response with a status code `201`.
 
-500
+##### 400 (Bad Request)
 
-#### Login
+> If you are missing a username or a password, the endpoint will return an HTTP response with a status code of `400`.
 
-##### Logs in already registered user.
+##### 500 (Internal Service Error)
 
-Method URL: /api/auth/login
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
-HTTP Method: POST
+## Login
 
-###### Headers
+### Logs in already registered user.
 
-| Name         |  Type  | Required |              Description |
-| ------------ | :----: | -------: | -----------------------: |
-| Content-Type | String |      Yes | Must be application/JSON |
+_Method URL:_ `/api/auth/login`
 
-###### Body
+_HTTP Method:_ **[POST]**
 
-| Name     |  Type  | Required |                                             Description |
-| -------- | :----: | -------: | ------------------------------------------------------: |
-| username | String |      Yes |                        Must match username in database. |
-| password | String |      Yes | Must match password to corresponding email in database. |
+#### Headers
 
-###### Example
+| Name           |  Type  | Required |              Description |
+| -------------- | :----: | -------: | -----------------------: |
+| `Content-Type` | String |      Yes | Must be application/JSON |
+
+#### Body
+
+| Name       |  Type  | Required |                                             Description |
+| ---------- | :----: | -------: | ------------------------------------------------------: |
+| `username` | String |      Yes |                        Must match username in database. |
+| `password` | String |      Yes | Must match password to corresponding email in database. |
+
+#### Example
 
 ```
 {
@@ -79,28 +136,371 @@ HTTP Method: POST
 }
 ```
 
-###### Response
+#### Response
 
-200
+##### 200 (OK)
 
-400
+> If you successfully login, the endpoint will return an HTTP response with a status code `200`.
 
-500
+##### 400 (Bad Request)
 
-### User Routes
+> If you are missing a username or a password, the endpoint will return an HTTP response with a status code of `400`.
 
-#### Get Users
+##### 401 (Unauthorized)
 
-##### Gets a list of users.
+> If you provide invalid credentials, the endpoint will return an HTTP response with a status code of `401`.
 
-#### Get User
+##### 500 (Internal Service Error)
 
-##### Gets user by ID.
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
 
-#### Delete User
+# User Routes
 
-##### Deletes user by ID.
+## Get Users
 
-#### Update User
+### Gets a list of users.
 
-##### Updates user by ID.
+_Method URL:_ `/api/users/`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If users are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If users are not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get User
+
+### Gets user by ID with associated plants.
+
+_Method URL:_ `/api/users/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Delete User
+
+### Deletes user by ID.
+
+_Method URL:_ `/api/users/:id`
+
+_HTTP Method:_ **[DELETE]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found and deleted, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Update User
+
+### Updates user by ID.
+
+_Method URL:_ `/api/users/:id`
+
+_HTTP Method:_ **[PUT]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name          |  Type  | Required |     Description |
+| ------------- | :----: | -------: | --------------: |
+| `username`    | String |      Yes | Must be unique. |
+| `password`    | String |      Yes |                 |
+| `phoneNumber` | String |       No |                 |
+
+#### Example
+
+```
+{
+"username": "plantlover",
+"password": "plants,
+"phoneNumber": "5555555555"
+}
+```
+
+#### Response
+
+##### 200 (OK)
+
+> If user with specified ID is found and updated, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If user with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+# Plant Routes
+
+## Create Plant
+
+### Creates a plant with plant name and water time.
+
+_Method URL:_ `/api/plants/`
+
+_HTTP Method:_ **[POST]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name             |  Type  | Required | Description |
+| ---------------- | :----: | -------: | ----------: |
+| `plantName`      | String |      Yes |             |
+| `dailyWaterTime` | String |       No |             |
+
+#### Example
+
+```
+{
+"plantName": "Carrots",
+"dailyWaterTime": "08:00:00"
+}
+```
+
+#### Response
+
+##### 201 (Created)
+
+> If plant is created, the endpoint will return an HTTP response with a status code `201`.
+
+##### 400 (Bad Request)
+
+> If you are missing a plant name, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Plants
+
+### Gets a list of plants.
+
+_Method URL:_ `/api/plants/`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plants are not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Plant
+
+### Gets plant by ID.
+
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Update Plant
+
+### Updates plant by ID.
+
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[PUT]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name             |  Type  | Required |           Description |
+| ---------------- | :----: | -------: | --------------------: |
+| `plantName`      | String |      Yes |                       |
+| `dailyWaterTime` | String |       No | Formatted as HH:MM:SS |
+
+#### Example
+
+```
+{
+"plantName": "Tulips",
+"dailyWaterTime": "09:30:00"
+}
+```
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found and updated, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found and updated, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Delete Plant
+
+### Deletes plant by ID.
+
+_Method URL:_ `/api/plants/:id`
+
+_HTTP Method:_ **[DELETE]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If plant with specified ID is found and deleted, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If plant with specified ID is not found and deleted, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.

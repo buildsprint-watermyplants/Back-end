@@ -23,11 +23,16 @@ async function add(user) {
   return findById(id);
 }
 
-function findById(id) {
-  return db("users")
-    .select("id", "username", "phoneNumber")
+async function findById(id) {
+  const users = await db("users")
     .where({ id })
     .first();
+
+  const plants = await db("plants").where({ user_id: id });
+
+  users["plants"] = plants;
+
+  return users;
 }
 
 function remove(id) {
