@@ -16,7 +16,7 @@ exports.seed = function(knex, Promise) {
         {
           id: 2,
           username: "admin2",
-          password: bcrypt.hashSync("password", 10),
+          password: bcrypt.hashSync("password2", 10),
           phoneNumber: "+15555555555"
         }
       ]);
