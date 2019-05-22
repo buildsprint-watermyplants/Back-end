@@ -6,7 +6,8 @@ module.exports = {
   findBy,
   findById,
   remove,
-  findByIdAndUpdate
+  findByIdAndUpdate,
+  findPlantsByUserId
 };
 
 function find() {
@@ -33,6 +34,12 @@ async function findById(id) {
   users["plants"] = plants;
 
   return users;
+}
+
+async function findPlantsByUserId(id) {
+  const plants = await db("plants").where({ user_id: id });
+  console.log(plants);
+  return plants;
 }
 
 function remove(id) {

@@ -31,6 +31,18 @@ router.get("/:id", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+router.get("/:id/plants", restricted, (req, res) => {
+  Users.findPlantsByUserId(req.params.id)
+    .then(userPlants => {
+      if (userPlants) {
+        return res.status(200).json(userPlants);
+      } else {
+        return res.status(404).json({ error: "Could not find user." });
+      }
+    })
+    .catch(err => res.send(err));
+});
+
 router.delete("/:id", restricted, (req, res) => {
   Users.remove(req.params.id)
     .then(deleted => {

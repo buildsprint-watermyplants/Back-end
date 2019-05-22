@@ -11,13 +11,13 @@ exports.seed = function(knex, Promise) {
           id: 1,
           username: "admin",
           password: bcrypt.hashSync("password", 10),
-          phoneNumber: "+15555555555"
+          phoneNumber: "5555555555"
         },
         {
           id: 2,
           username: "admin2",
           password: bcrypt.hashSync("password2", 10),
-          phoneNumber: "+15555555555"
+          phoneNumber: "5555555555"
         }
       ]);
     });
