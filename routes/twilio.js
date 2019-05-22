@@ -3,6 +3,7 @@ const momentTimeZone = require("moment-timezone");
 const moment = require("moment");
 const Reminder = require("../db/models/Reminders");
 const router = express.Router();
+const phone = require("phone-regex");
 
 const getTimeZones = function() {
   return momentTimeZone.tz.names();
@@ -27,7 +28,7 @@ router.post("/", function(req, res, next) {
   const time = moment(req.body.time, "hh:mma");
 
   // validate phone number
-  if (!validatePhone(phoneNumber)) {
+  if (!phone({ exact: true }).test(phoneNumber)) {
     res.status(404).json({
       message: "Please enter a valid US phone number. Ex: 5553567825"
     });
