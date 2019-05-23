@@ -3,6 +3,7 @@ const momentTimeZone = require("moment-timezone");
 const moment = require("moment");
 const Reminder = require("../db/models/Reminders");
 const router = express.Router();
+const phone = require("phone-regex");
 
 const getTimeZones = function() {
   return momentTimeZone.tz.names();
@@ -21,22 +22,29 @@ router.get("/:id", function(req, res, next) {
 
 router.post("/", function(req, res, next) {
   const plantName = req.body.plantName;
-  const phoneNumber = req.body.phoneNumber;
+  const phoneNumber = "+1" + req.body.phoneNumber;
   const notification = req.body.notification;
   const timeZone = req.body.timeZone;
   const time = moment(req.body.time, "hh:mma");
 
-  const reminder = new Reminder({
-    plantName: plantName,
-    phoneNumber: phoneNumber,
-    notification: notification,
-    timeZone: timeZone,
-    time: time
-  });
-  reminder
-    .save()
-    .then(reminder => res.json(reminder))
-    .catch(err => res.json(err));
+  // validate phone number
+  if (!phone({ exact: true }).test(phoneNumber)) {
+    res.status(404).json({
+      message: "Please enter a valid US phone number. Ex: 5553567825"
+    });
+  } else {
+    const reminder = new Reminder({
+      plantName: plantName,
+      phoneNumber: phoneNumber,
+      notification: notification,
+      timeZone: timeZone,
+      time: time
+    });
+    reminder
+      .save()
+      .then(reminder => res.json(reminder))
+      .catch(err => res.json(err));
+  }
 });
 
 router.put("/:id", function(req, res, next) {
@@ -64,5 +72,14 @@ router.post("/:id/delete", function(req, res, next) {
 
   Reminder.remove({ _id: id }).then(function() {});
 });
+
+function validatePhone(number) {
+  var phone = /^\d{10}$/;
+  if (number.match(phone)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 module.exports = router;

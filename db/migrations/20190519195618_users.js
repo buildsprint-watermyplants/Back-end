@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
       .unique();
     users.string("password", 128).notNullable();
     users.string("phoneNumber", 128);
+    users.integer("avatar_id");
   });
 };
 

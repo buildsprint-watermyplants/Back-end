@@ -11,6 +11,7 @@ exports.up = function(knex, Promise) {
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
+    plants.integer("plant_avatar_id");
   });
 };
 
