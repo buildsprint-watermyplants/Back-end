@@ -33,6 +33,7 @@ ReminderSchema.methods.requiresNotification = function(date) {
 ReminderSchema.statics.sendNotifications = function(callback) {
   // now
   const searchDate = new Date();
+  console.log(searchDate);
   Reminder.find().then(function(reminders) {
     reminders = reminders.filter(function(reminder) {
       return reminder.requiresNotification(searchDate);
