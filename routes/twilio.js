@@ -61,7 +61,7 @@ router.get("/user/:id", (req, res) => {
 
 router.get("/plant/:id", (req, res) => {
   const id = req.params.id;
-  Reminder.find({ plant: id })
+  Reminder.find({ plant_id: id })
     .then(reminders => {
       if (reminders) {
         return res.status(200).json(reminders);
