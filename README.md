@@ -543,7 +543,7 @@ _HTTP Method:_ **[POST]**
 {
 	"plantName": "Sunflower",
 	"timeZone": "America/Phoenix",
-	"time": "11:30am",
+	"time": "5-21-2019 11:30am",
 	"phoneNumber": "5551234567"
 }
 ```

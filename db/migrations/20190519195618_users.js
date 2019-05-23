@@ -9,6 +9,8 @@ exports.up = function(knex, Promise) {
     users.string("password", 128).notNullable();
     users.string("phoneNumber", 128);
     users.integer("avatar_id");
+    users.boolean("useTwilio");
+    users.string("timezone");
   });
 };
 
