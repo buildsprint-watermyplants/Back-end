@@ -107,7 +107,7 @@ router.delete("/:id", function(req, res, next) {
   Reminder.remove({ _id: id })
     .then(reminder => {
       if (reminder) {
-        return res.status(200).json(reminder);
+        return res.status(200).json({ message: "Reminder deleted." });
       } else {
         return res
           .status(404)

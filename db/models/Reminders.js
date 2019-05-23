@@ -6,12 +6,15 @@ const Twilio = require("twilio");
 const ReminderSchema = new mongoose.Schema({
   plantName: String,
   phoneNumber: String,
-  notification: Number,
+  notification: { type: Number, default: 0 },
   timeZone: String,
   time: { type: Date, index: true }
 });
 
 ReminderSchema.methods.requiresNotification = function(date) {
+  console.log(moment(this.time));
+  console.log(moment(this.timeZone));
+  console.log(moment(this.time).tz(this.timeZone));
   return (
     Math.round(
       moment
@@ -33,6 +36,7 @@ ReminderSchema.statics.sendNotifications = function(callback) {
     reminders = reminders.filter(function(reminder) {
       return reminder.requiresNotification(searchDate);
     });
+
     console.log(reminders.length);
     // if (reminders.length > 0) {
     sendNotifications(reminders);
