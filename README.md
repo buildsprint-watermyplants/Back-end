@@ -504,3 +504,58 @@ _HTTP Method:_ **[DELETE]**
 ##### 500 (Internal Service Error)
 
 > If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+# Twilio Routes
+
+## Create Reminder
+
+### Creates a reminder with a plantName, phoneNumber, timeZone, and time.
+
+_Method URL:_ `/api/twilio/`
+
+_HTTP Method:_ **[POST]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name          |  Type  | Required |              Example |
+| ------------- | :----: | -------: | -------------------: |
+| `plantName`   | String |      Yes |          'Sunflower' |
+| `phoneNumber` | String |      Yes |         '5551234567' |
+| `timeZone`    | String |      Yes |    'America/Phoenix' |
+| `time`        |  Date  |      Yes | '05-23-2019 11:30am' |
+
+#### Example
+
+```
+{
+	"plantName": "Sunflower",
+	"timeZone": "America/Phoenix",
+	"time": "11:30am",
+	"phoneNumber": "5551234567"
+}
+```
+
+#### Response
+
+##### 201 (Created)
+
+> If reminder is created, the endpoint will return an HTTP response with a status code `201`.
+
+##### 400 (Bad Request)
+
+> If you enter an invalid phone number, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.

@@ -29,7 +29,7 @@ router.post("/", function(req, res, next) {
 
   // validate phone number
   if (!phone({ exact: true }).test(phoneNumber)) {
-    res.status(404).json({
+    res.status(400).json({
       message: "Please enter a valid US phone number. Ex: 5553567825"
     });
   } else {
@@ -38,12 +38,12 @@ router.post("/", function(req, res, next) {
       phoneNumber: phoneNumber,
       notification: notification,
       timeZone: timeZone,
-      time: time
+      time: moment(req.body.time, "MM-DD-YYYY hh:mma")
     });
     reminder
       .save()
-      .then(reminder => res.json(reminder))
-      .catch(err => res.json(err));
+      .then(reminder => res.status(201).json(reminder))
+      .catch(err => res.status(500).json(err));
   }
 });
 
