@@ -47,7 +47,7 @@ router.post("/", function(req, res, next) {
   const phoneNumber = "+1" + req.body.phoneNumber;
   const notification = req.body.notification;
   const timeZone = req.body.timeZone;
-  const time = moment(req.body.time, "hh:mma");
+  const time = req.body.time;
 
   // validate phone number
   if (!phone({ exact: true }).test(phoneNumber)) {
@@ -60,7 +60,7 @@ router.post("/", function(req, res, next) {
       phoneNumber: phoneNumber,
       notification: notification,
       timeZone: timeZone,
-      time: moment(req.body.time, "MM-DD-YYYY hh:mma")
+      time: moment(time, "MM-DD-YYYY hh:mma")
     });
     reminder
       .save()

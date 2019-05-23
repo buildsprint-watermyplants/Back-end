@@ -13,7 +13,6 @@ const ReminderSchema = new mongoose.Schema({
 
 ReminderSchema.methods.requiresNotification = function(date) {
   console.log(moment(this.time));
-  console.log(moment(this.timeZone));
   console.log(moment(this.time).tz(this.timeZone));
   return (
     Math.round(
