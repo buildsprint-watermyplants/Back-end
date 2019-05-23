@@ -530,12 +530,12 @@ _HTTP Method:_ **[POST]**
 
 #### Body
 
-| Name          |  Type  | Required |              Example |
-| ------------- | :----: | -------: | -------------------: |
-| `plantName`   | String |      Yes |          'Sunflower' |
-| `phoneNumber` | String |      Yes |         '5551234567' |
-| `timeZone`    | String |      Yes |    'America/Phoenix' |
-| `time`        |  Date  |      Yes | '05-23-2019 11:30am' |
+| Name          |  Type  | Required |                                                                                                                                           Description |
+| ------------- | :----: | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `plantName`   | String |      Yes |                                                                                                                                       Ex: 'Sunflower' |
+| `phoneNumber` | String |      Yes |                                                                           Must be a 10 digit US phone number in the following format. Ex:'5551234567' |
+| `timeZone`    | String |      Yes |                                                                                                                             Ex: 'America/Los_Angeles' |
+| `time`        |  Date  |      Yes | Time must be sent in UTC time. Must be converted from desired timezone. Ex: '05-23-2019 5:30pm' UTC will send at '05-23-2019 10:30am' in Los Angeles. |
 
 #### Example
 
