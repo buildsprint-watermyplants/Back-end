@@ -59,6 +59,23 @@ router.get("/user/:id", (req, res) => {
     });
 });
 
+router.get("/plant/:id", (req, res) => {
+  const id = req.params.id;
+  Reminder.find({ plant: id })
+    .then(reminders => {
+      if (reminders) {
+        return res.status(200).json(reminders);
+      } else {
+        return res
+          .status(404)
+          .json({ message: "Reminders for that plant could not be found." });
+      }
+    })
+    .catch(err => {
+      return res.status(500).json(err);
+    });
+});
+
 router.post("/", function(req, res, next) {
   const plantName = req.body.plantName;
   const phoneNumber = "+1" + req.body.phoneNumber;

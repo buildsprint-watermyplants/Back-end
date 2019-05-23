@@ -9,7 +9,8 @@ const ReminderSchema = new mongoose.Schema({
   notification: { type: Number, default: 0 },
   timeZone: String,
   time: { type: Date, index: true },
-  user_id: Number
+  user_id: Number,
+  plant_id: Number
 });
 
 ReminderSchema.methods.requiresNotification = function(date) {
