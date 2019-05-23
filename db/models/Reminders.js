@@ -14,8 +14,6 @@ const ReminderSchema = new mongoose.Schema({
 ReminderSchema.methods.requiresNotification = function(date) {
   const momentTime = moment(this.time);
   const timeZone = moment(this.time).tz(this.timeZone);
-  console.log(momentTime);
-  console.log(timeZone);
   return (
     Math.round(
       moment
@@ -23,7 +21,7 @@ ReminderSchema.methods.requiresNotification = function(date) {
           moment(this.time)
             .tz(this.timeZone)
             .utc()
-            .diff(moment(this.time).utc())
+            .diff(moment(searchDate).utc())
         )
         .asMinutes()
     ) === this.notification
@@ -33,7 +31,6 @@ ReminderSchema.methods.requiresNotification = function(date) {
 ReminderSchema.statics.sendNotifications = function(callback) {
   // now
   const searchDate = new Date();
-  console.log(searchDate);
   Reminder.find().then(function(reminders) {
     reminders = reminders.filter(function(reminder) {
       return reminder.requiresNotification(searchDate);
