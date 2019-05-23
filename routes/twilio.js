@@ -83,7 +83,7 @@ router.post("/", function(req, res, next) {
   const timeZone = req.body.timeZone;
   const time = req.body.time;
   const user_id = req.body.user_id;
-  const plant_id = req.body.plant;
+  const plant_id = req.body.plant_id;
 
   // validate phone number
   if (!phone({ exact: true }).test(phoneNumber)) {
