@@ -8,7 +8,8 @@ const ReminderSchema = new mongoose.Schema({
   phoneNumber: String,
   notification: { type: Number, default: 0 },
   timeZone: String,
-  time: { type: Date, index: true }
+  time: { type: Date, index: true },
+  user_id: Number
 });
 
 ReminderSchema.methods.requiresNotification = function(date) {

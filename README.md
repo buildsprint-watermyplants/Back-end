@@ -530,12 +530,13 @@ _HTTP Method:_ **[POST]**
 
 #### Body
 
-| Name          |  Type  | Required |                                                                                                                                           Description |
-| ------------- | :----: | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
-| `plantName`   | String |      Yes |                                                                                                                                       Ex: 'Sunflower' |
-| `phoneNumber` | String |      Yes |                                                                           Must be a 10 digit US phone number in the following format. Ex:'5551234567' |
-| `timeZone`    | String |      Yes |                                                                                                                             Ex: 'America/Los_Angeles' |
-| `time`        |  Date  |      Yes | Time must be sent in UTC time. Must be converted from desired timezone. Ex: '05-23-2019 5:30pm' UTC will send at '05-23-2019 10:30am' in Los Angeles. |
+| Name          |  Type   | Required |                                                                                                                                           Description |
+| ------------- | :-----: | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `plantName`   | String  |      Yes |                                                                                                                                       Ex: 'Sunflower' |
+| `phoneNumber` | String  |      Yes |                                                                           Must be a 10 digit US phone number in the following format. Ex:'5551234567' |
+| `timeZone`    | String  |      Yes |                                                                                                                             Ex: 'America/Los_Angeles' |
+| `time`        |  Date   |      Yes | Time must be sent in UTC time. Must be converted from desired timezone. Ex: '05-23-2019 5:30pm' UTC will send at '05-23-2019 10:30am' in Los Angeles. |
+| `user_id`     | Integer |      Yes |
 
 #### Example
 
@@ -544,7 +545,8 @@ _HTTP Method:_ **[POST]**
 	"plantName": "Sunflower",
 	"timeZone": "America/Phoenix",
 	"time": "5-21-2019 11:30am",
-	"phoneNumber": "5551234567"
+	"phoneNumber": "5551234567",
+    "user_id: 1
 }
 ```
 
@@ -623,6 +625,39 @@ _HTTP Method:_ **[GET]**
 ##### 404 (Not Found)
 
 > If reminder with specified ID is not found, the endpoint will return an HTTP response with a status code of `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Reminders for User
+
+### Gets reminder by User ID.
+
+_Method URL:_ `/api/twilio/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If reminders for user with specified ID are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminders for user with specified ID are not found, the endpoint will return an HTTP response with a status code of `404`.
 
 ##### 401 (Unauthorized)
 

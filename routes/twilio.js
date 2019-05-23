@@ -42,12 +42,30 @@ router.get("/:id", function(req, res, next) {
     });
 });
 
+router.get("/user/:id", (req, res) => {
+  const id = req.params.id;
+  Reminder.find({ user_id: id })
+    .then(reminders => {
+      if (reminders) {
+        return res.status(200).json(reminders);
+      } else {
+        return res
+          .status(404)
+          .json({ message: "Reminders for that user could not be found." });
+      }
+    })
+    .catch(err => {
+      return res.status(500).json(err);
+    });
+});
+
 router.post("/", function(req, res, next) {
   const plantName = req.body.plantName;
   const phoneNumber = "+1" + req.body.phoneNumber;
   const notification = req.body.notification;
   const timeZone = req.body.timeZone;
   const time = req.body.time;
+  const user_id = req.body.user_id;
 
   // validate phone number
   if (!phone({ exact: true }).test(phoneNumber)) {
@@ -60,7 +78,8 @@ router.post("/", function(req, res, next) {
       phoneNumber: phoneNumber,
       notification: notification,
       timeZone: timeZone,
-      time: moment(time, "MM-DD-YYYY hh:mma")
+      time: moment(time, "MM-DD-YYYY hh:mma"),
+      user_id: user_id
     });
     reminder
       .save()
