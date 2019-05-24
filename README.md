@@ -17,6 +17,12 @@
   - [Get Plant](#get-plant)
   - [Update Plants](#update-plant)
   - [Delete Plants](#delete-plant)
+- [Twilio Routes](#twilio-routes)
+  - [Create Reminder](#create-reminder)
+  - [Get Reminders](#get-reminders)
+  - [Get Reminder](#get-reminder)
+  - [Update Reminder](#update-reminder)
+  - [Delete Reminder](#delete-reminder)
 
 ## API Documentation
 
@@ -496,6 +502,248 @@ _HTTP Method:_ **[DELETE]**
 ##### 404 (Not Found)
 
 > If plant with specified ID is not found and deleted, the endpoint will return an HTTP response with a status code `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+# Twilio Routes
+
+## Create Reminder
+
+### Creates a reminder with a plantName, phoneNumber, timeZone, and time.
+
+_Method URL:_ `/api/twilio/`
+
+_HTTP Method:_ **[POST]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name          |  Type   | Required |                                                                                                                                           Description |
+| ------------- | :-----: | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `plantName`   | String  |      Yes |                                                                                                                                       Ex: 'Sunflower' |
+| `phoneNumber` | String  |      Yes |                                                                           Must be a 10 digit US phone number in the following format. Ex:'5551234567' |
+| `timeZone`    | String  |      Yes |                                                                                                                             Ex: 'America/Los_Angeles' |
+| `time`        |  Date   |      Yes | Time must be sent in UTC time. Must be converted from desired timezone. Ex: '05-23-2019 5:30pm' UTC will send at '05-23-2019 10:30am' in Los Angeles. |
+| `user_id`     | Integer |      Yes |
+
+#### Example
+
+```
+{
+	"plantName": "Sunflower",
+	"timeZone": "America/Phoenix",
+	"time": "5-21-2019 11:30am",
+	"phoneNumber": "5551234567",
+    "user_id: 1
+}
+```
+
+#### Response
+
+##### 201 (Created)
+
+> If reminder is created, the endpoint will return an HTTP response with a status code `201`.
+
+##### 400 (Bad Request)
+
+> If you enter an invalid phone number, the endpoint will return an HTTP response with a status code of `400`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Reminders
+
+### Gets reminders for user.
+
+_Method URL:_ `/api/twilio/`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If reminders are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminders are not found, the endpoint will return an HTTP response with a status code of `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Reminder
+
+### Gets reminder by ID.
+
+_Method URL:_ `/api/twilio/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If reminder with specified ID is found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminder with specified ID is not found, the endpoint will return an HTTP response with a status code of `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Get Reminders for User
+
+### Gets reminder by User ID.
+
+_Method URL:_ `/api/twilio/:id`
+
+_HTTP Method:_ **[GET]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If reminders for user with specified ID are found, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminders for user with specified ID are not found, the endpoint will return an HTTP response with a status code of `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Update Reminder
+
+### Updates reminder by ID.
+
+_Method URL:_ `/api/twilio/:id`
+
+_HTTP Method:_ **[PUT]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Body
+
+| Name          |  Type  | Required |              Example |
+| ------------- | :----: | -------: | -------------------: |
+| `plantName`   | String |      Yes |          'Sunflower' |
+| `phoneNumber` | String |      Yes |         '5551234567' |
+| `timeZone`    | String |      Yes |    'America/Phoenix' |
+| `time`        |  Date  |      Yes | '05-23-2019 11:30am' |
+
+#### Example
+
+```
+{
+	"plantName": "Sunflower",
+	"timeZone": "America/Pacific",
+	"time": "11:50am",
+	"phoneNumber": "5551234567"
+}
+```
+
+#### Response
+
+##### 200 (OK)
+
+> If reminders with specified ID is updated, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminders with specified ID is not found, the endpoint will return an HTTP response with a status code of `404`.
+
+##### 401 (Unauthorized)
+
+> If user does not have access, the endpoint will return an HTTP response with a status code of `401`.
+
+##### 500 (Internal Service Error)
+
+> If there is a server or database error, the endpoint will return an HTTP response with a status code of `500`.
+
+## Delete Reminder
+
+### Deletes reminder by ID.
+
+_Method URL:_ `/api/twilio/:id`
+
+_HTTP Method:_ **[DELETE]**
+
+#### Headers
+
+| Name            |  Type  | Required |              Description |
+| --------------- | :----: | -------: | -----------------------: |
+| `Content-Type`  | String |      Yes | Must be application/JSON |
+| `Authorization` | String |      Yes |           JSON Web Token |
+
+#### Response
+
+##### 200 (OK)
+
+> If reminder with specified ID is deleted, the endpoint will return an HTTP response with a status code `200`.
+
+##### 404 (Not Found)
+
+> If reminder with specified ID is not found, the endpoint will return an HTTP response with a status code of `404`.
 
 ##### 401 (Unauthorized)
 

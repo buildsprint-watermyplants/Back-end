@@ -8,7 +8,9 @@ exports.up = function(knex, Promise) {
       .unique();
     users.string("password", 128).notNullable();
     users.string("phoneNumber", 128);
-    users.integer("avatar_id");
+    users.integer("avatar_id").defaultTo(null);
+    users.boolean("useTwilio").defaultTo(false);
+    users.string("timezone").defaultTo(null);
   });
 };
 
