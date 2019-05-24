@@ -23,7 +23,7 @@ ReminderSchema.methods.requiresNotification = function(date) {
           moment(this.time)
             .tz(this.timeZone)
             .utc()
-            .diff(moment(searchDate).utc())
+            .diff(moment(date).utc())
         )
         .asMinutes()
     ) === this.notification
