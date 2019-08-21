@@ -27,6 +27,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/plants", plantRoutes);
 app.use("/api/twilio", twilioRoutes);
 
+app.get("/", (req ,res) => {
+  res.send("App is Live");
+})
+
 const port = process.env.PORT || 3000;
 
 scheduler.start();
